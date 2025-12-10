@@ -7,3 +7,11 @@ export type Van = {
   type: string;
   hostId: string;
 };
+
+export type UserFirebase = {
+  id: string;
+  phone: string;
+  name: string;
+  email: string;
+  createdAt: string;
+};

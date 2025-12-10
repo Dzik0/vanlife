@@ -19,6 +19,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./providers/AuthProvider";
 import Register from "./pages/Register";
+import Details from "./pages/Host/Details";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
                   <Route path="income" element={<Income />} />
                   <Route path="reviews" element={<Reviews />} />
                   <Route path="vans" element={<RentedVans />} />
+                  <Route path="details" element={<Details />} />
                   <Route path="vans/:id" element={<RentedVanHost />}>
                     <Route index element={<RentedVanDetails />} />
                     <Route path="pricing" element={<RentedVanPricing />} />

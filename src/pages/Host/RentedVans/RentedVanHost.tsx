@@ -32,6 +32,7 @@ export default function RentedVanHost() {
       </Link>
 
       {loading && <p className="py-5 text-center">Loading your van...🚐</p>}
+      {!van && <p>Seems like this van doesn't exist!</p>}
       {!loading && van && (
         <div className="flex flex-col gap-5 rounded-md bg-white p-4">
           <div className="flex flex-row items-center gap-4">

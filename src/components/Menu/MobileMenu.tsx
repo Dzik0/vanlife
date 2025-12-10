@@ -12,7 +12,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
-  const { loggedUser, loading } = useAuthContext();
+  const { loggedUser } = useAuthContext();
 
   return (
     <nav className="flex flex-row items-center gap-8 xl:hidden">

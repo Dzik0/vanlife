@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { auth } from "../API/Api";
+import { auth, db } from "../API/Api";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from "../providers/AuthProvider";
 import { Navigate } from "react-router";
+import { doc, setDoc } from "firebase/firestore";
 
 interface ErrorsProps {
   email?: string;
@@ -51,7 +52,19 @@ export default function Register() {
 
     try {
       setLoadingReg(true);
-      await createUserWithEmailAndPassword(auth, user.email, user.password);
+      const userCred = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password,
+      );
+
+      const firebaseUser = userCred.user;
+      await setDoc(doc(db, "users", firebaseUser.uid), {
+        name: "",
+        phone: "",
+        email: firebaseUser.email,
+        createdAt: new Date(),
+      });
     } catch (err: any) {
       console.error("This is your auth error:", err);
       /*       console.log("YOUR CODE:", err.code); */
@@ -103,7 +116,7 @@ export default function Register() {
               <p className="text-sm text-red-500">{errors.password}</p>
             )}
           </div>
-          <button className="bg-my-orange mt-5 rounded-md p-4 text-white">
+          <button className="bg-my-orange mt-5 cursor-pointer rounded-md p-4 text-white">
             {loadingReg ? "Creating..." : "Sign Up!"}
           </button>
         </form>

@@ -1,7 +1,12 @@
+import { signOut } from "firebase/auth";
+import { useAuthContext } from "../../providers/AuthProvider";
 import user from "/user.svg";
 import { NavLink, Link } from "react-router";
+import { auth } from "../../API/Api";
 
 export default function PCMenu() {
+  const { loggedUser } = useAuthContext();
+
   return (
     <nav className="hidden xl:block">
       <ul className="flex flex-row items-center gap-5">
@@ -37,11 +42,22 @@ export default function PCMenu() {
           </NavLink>
         </li>
         <li>
-          <Link to="login">
-            <div className="w-5">
-              <img src={user} alt="user logo" />
-            </div>
-          </Link>
+          {!loggedUser ? (
+            <Link to="login">
+              <div className="w-5">
+                <img src={user} alt="user logo" />
+              </div>
+            </Link>
+          ) : (
+            <button
+              className="cursor-pointer text-sm"
+              onClick={() => {
+                signOut(auth);
+              }}
+            >
+              Log out
+            </button>
+          )}
         </li>
       </ul>
     </nav>

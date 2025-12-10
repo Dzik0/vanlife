@@ -1,18 +1,19 @@
 import SingleVan from "../../components/SingleVan";
 import { Link } from "react-router";
 import { useOwnedVans } from "../../components/HostLayout";
-import { auth } from "../../API/Api";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 export default function Dashboard() {
   const { myVans, loading, error } = useOwnedVans();
+  const { profile } = useAuthContext();
   if (error) console.log("Error:", error);
 
   return (
-    <>
-      <div className="bg-my-dark-beige flex flex-1 flex-col gap-4 p-4">
-        <h2 className="mb-10 text-2xl font-bold">
-          Welcome {auth?.currentUser?.email}!
-        </h2>
+    <div className="bg-my-beige flex-1">
+      <h2 className="mt-5 mb-5 p-4 text-2xl font-bold">
+        Welcome {profile?.name}!
+      </h2>
+      {/* <div className="flex flex-col gap-4 p-4">
         <div className="flex flex-row items-center justify-between">
           <p className="text-sm text-gray-500">
             Income last{" "}
@@ -21,8 +22,8 @@ export default function Dashboard() {
           <p className="text-sm">Details</p>
         </div>
         <h3 className="text-3xl font-bold">$2,260</h3>
-      </div>
-      <div className="bg-my-darker-beige p-4 py-8">
+      </div> */}
+      {/*    <div className="bg-my-darker-beige p-4 py-8">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row gap-3">
             <p className="font-bold">Review score</p>
@@ -34,7 +35,7 @@ export default function Dashboard() {
           </div>
           <p>Details</p>
         </div>
-      </div>
+      </div> */}
       <div className="bg-my-beige flex flex-col gap-4 p-4 py-7">
         <div className="flex flex-row items-center justify-between">
           <h3 className="font-bold">Your listed vans</h3>
@@ -62,6 +63,6 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

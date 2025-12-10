@@ -5,9 +5,7 @@ export default function ProtectedRoute() {
   const location = useLocation();
   const { loggedUser, loading } = useAuthContext();
 
-  if (loading) {
-    <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
 
   return loggedUser ? (
     <Outlet />

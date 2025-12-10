@@ -56,5 +56,17 @@ export async function getHostVans(id: string) {
   return vans;
 }
 
+export async function getUserDetails(id: string) {
+  if (id === "") {
+    throw new Error("This function needs ID!");
+  }
+
+  const docRef = doc(db, "users", id);
+  const snapshot = await getDoc(docRef);
+  const userDetails = { ...snapshot.data(), id: id };
+
+  return userDetails;
+}
+
 //AUTH
 export const auth = getAuth(app);

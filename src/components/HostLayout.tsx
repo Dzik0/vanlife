@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useOutletContext } from "react-router";
 import { useVans } from "../providers/VansProvider";
 import { type Van } from "../types/types";
-import { useAuthContext } from "../providers/AuthProvider";
+import { auth } from "../API/Api";
 
 interface StyleProps {
   isActive: boolean;
@@ -21,10 +21,10 @@ export default function HostLayout() {
 
   const { vans, loading, error } = useVans();
 
-  const hostId = "123";
+  const hostId = auth.currentUser?.uid;
+  console.log(auth.currentUser?.uid);
 
   const myVans = vans.filter((van) => van.hostId === hostId);
-  console.log(myVans);
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function HostLayout() {
         >
           Dashboard
         </NavLink>
-        <NavLink
+        {/*  <NavLink
           to="income"
           className="hover:text-black hover:underline"
           style={({ isActive }: StyleProps) =>
@@ -47,7 +47,7 @@ export default function HostLayout() {
           }
         >
           Income
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="vans"
           className="hover:text-black hover:underline"
@@ -57,7 +57,7 @@ export default function HostLayout() {
         >
           Vans
         </NavLink>
-        <NavLink
+        {/*   <NavLink
           to="reviews"
           className="hover:text-black hover:underline"
           style={({ isActive }: StyleProps) =>
@@ -65,6 +65,15 @@ export default function HostLayout() {
           }
         >
           Reviews
+        </NavLink> */}
+        <NavLink
+          to="details"
+          className="hover:text-black hover:underline"
+          style={({ isActive }: StyleProps) =>
+            isActive ? activeLink : undefined
+          }
+        >
+          Details
         </NavLink>
       </nav>
       <Outlet

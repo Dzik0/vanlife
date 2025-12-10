@@ -98,6 +98,7 @@ export default function Login() {
             onChange={handleChange}
             type="email"
             name="email"
+            autoComplete="off"
             id="email"
             placeholder="Email adress"
             className="outline-my-orange w-full rounded-md border border-gray-400 bg-white p-2 pl-3 placeholder:text-gray-400"
@@ -111,6 +112,7 @@ export default function Login() {
           <input
             onChange={handleChange}
             type="password"
+            autoComplete="off"
             name="password"
             id="password"
             placeholder="Password"
@@ -125,7 +127,7 @@ export default function Login() {
           {logging ? "Logging..." : "Log in"}
         </button>
       </form>
-      <div className="text-center underline underline-offset-2 hover:font-bold">
+      <div className="cursor-pointer text-center underline underline-offset-2 hover:font-bold">
         <Link to="/register">Don't have an account? Register now!</Link>
       </div>
     </div>
