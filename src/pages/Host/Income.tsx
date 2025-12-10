@@ -2,7 +2,7 @@ import graph from "/graph.jpg";
 
 export default function Income() {
   return (
-    <div className="bg-my-beige flex flex-col gap-10 p-4 pb-15">
+    <div className="bg-my-beige flex flex-1 flex-col gap-10 p-4 pb-15">
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-bold">Income</h2>
         <p>Last 30 days</p>

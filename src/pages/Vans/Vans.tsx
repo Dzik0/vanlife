@@ -48,7 +48,7 @@ export default function Vans() {
   }
 
   return (
-    <div className="bg-my-beige flex h-full flex-1 flex-col gap-8 border px-5 py-10">
+    <div className="bg-my-beige flex h-full flex-1 flex-col gap-8 px-5 py-10">
       <h1 className="text-xl font-bold">Explore our van options</h1>
       <div className="flex items-center justify-between">
         <div className="flex flex-row flex-wrap gap-4">

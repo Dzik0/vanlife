@@ -2,7 +2,7 @@ import stars from "/stars.jpg";
 
 export default function Reviews() {
   return (
-    <div className="bg-my-beige flex flex-col gap-5 p-4 pb-15">
+    <div className="bg-my-beige flex flex-1 flex-col gap-5 p-4 pb-15">
       <div className="flex flex-row items-end gap-2">
         <h2 className="text-2xl font-bold">Your reviews</h2>
         <p className="text-sm">last 30 days</p>

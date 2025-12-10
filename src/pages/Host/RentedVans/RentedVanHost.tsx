@@ -26,7 +26,7 @@ export default function RentedVanHost() {
   };
 
   return (
-    <div className="bg-my-beige flex flex-col gap-8 p-4 py-8">
+    <div className="bg-my-beige flex flex-1 flex-col gap-8 p-4 py-8">
       <Link to=".." relative="path">
         🔙 Back to all vans
       </Link>

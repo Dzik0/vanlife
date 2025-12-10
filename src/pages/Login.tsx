@@ -71,7 +71,7 @@ export default function Login() {
     ); */
 
   return (
-    <div className="bg-my-beige flex flex-col gap-15 px-10 py-15">
+    <div className="bg-my-beige flex flex-1 flex-col gap-15 px-10 py-15">
       {location.state?.auth && (
         <p className="text-center text-red-500">{location.state.auth}</p>
       )}

@@ -41,7 +41,7 @@ export default function Van() {
 
   return (
     van && (
-      <div className="bg-my-beige flex flex-col gap-10 px-5 py-10">
+      <div className="bg-my-beige flex flex-1 flex-col gap-10 px-5 py-10">
         <div className="flex flex-row items-center gap-2">
           <div className="text-2xl text-gray-300">←</div>
           <button className="text-sm">

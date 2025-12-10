@@ -7,7 +7,7 @@ export default function RentedVans() {
 
   if (error) console.log("Error:", error);
   return (
-    <div className="bg-my-beige flex flex-col gap-4 p-4 py-7 pb-15">
+    <div className="bg-my-beige flex flex-1 flex-col gap-4 p-4 py-7 pb-15">
       <div className="flex flex-row items-center justify-between">
         <h3 className="font-bold">Your listed vans</h3>
       </div>

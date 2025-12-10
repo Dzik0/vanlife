@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="bg-my-dark-beige flex flex-col gap-4 p-4">
+      <div className="bg-my-dark-beige flex flex-1 flex-col gap-4 p-4">
         <h2 className="text-2xl font-bold">Welcome!</h2>
         <div className="flex flex-row items-center justify-between">
           <p className="text-sm text-gray-500">
