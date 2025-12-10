@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function Home() {
   return (
-    <div id="holder" className="relative h-full">
+    <div id="holder" className="relative flex-1">
       <div className="absolute top-0 bottom-0 z-0 w-full bg-black opacity-60"></div>
       <div className="relative flex flex-col gap-10 p-6 py-20 text-white">
         <h1 className="text-4xl font-bold">

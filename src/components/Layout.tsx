@@ -4,9 +4,9 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <div className="flex h-dvh flex-col justify-between">
+    <div className="flex min-h-dvh flex-col">
       <Header />
-      <main className="h-full">
+      <main className="flex flex-1 flex-col">
         <Outlet />
       </main>
       <Footer />

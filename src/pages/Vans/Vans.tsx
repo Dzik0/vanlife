@@ -48,10 +48,10 @@ export default function Vans() {
   }
 
   return (
-    <div className="bg-my-beige flex flex-col gap-8 px-5 py-10">
+    <div className="bg-my-beige flex h-full flex-1 flex-col gap-8 border px-5 py-10">
       <h1 className="text-xl font-bold">Explore our van options</h1>
       <div className="flex items-center justify-between">
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row flex-wrap gap-4">
           {/* CLASSIC BUTTONS WITH HARDCODED VALUES */}
           {/*  <button
             className="bg-my-dark-beige cursor-pointer rounded-md px-7 py-2"
@@ -117,7 +117,7 @@ export default function Vans() {
       )}
 
       {filteredVans.length > 0 && (
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 gap-15">
           {filteredVans.map((van) => (
             <Link
               to={van.id.toLocaleString()}
