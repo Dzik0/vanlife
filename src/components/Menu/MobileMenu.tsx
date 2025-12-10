@@ -15,7 +15,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   const { loggedUser, loading } = useAuthContext();
 
   return (
-    <nav className="flex flex-row items-center gap-8">
+    <nav className="flex flex-row items-center gap-8 xl:hidden">
       {isOpen && (
         <div className="bg-my-beige absolute top-22 right-5 left-5 z-30 rounded-md shadow-[0px_5px_15px_0px_black]">
           <ul className="flex flex-col items-center gap-5 p-5">

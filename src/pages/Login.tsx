@@ -17,12 +17,11 @@ interface ErrorProps {
 
 export default function Login() {
   const location = useLocation();
-  const from = location.state?.from.pathname || "/";
+  /* const from = location.state?.from.pathname || "/"; */
   const [user, setUser] = useState<User>({ email: "", password: "" });
   const [logging, setLogging] = useState(false);
   const [errors, setErrors] = useState<ErrorProps>({});
   const { loggedUser, loading } = useAuthContext();
-  console.log(auth?.currentUser?.email);
 
   async function SignIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

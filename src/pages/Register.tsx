@@ -13,7 +13,7 @@ interface ErrorsProps {
 export default function Register() {
   const { loggedUser, loading } = useAuthContext();
   const [user, setUser] = useState({
-    email: "hunter976@gmail.com",
+    email: "",
     password: "",
   });
   const [errors, setErrors] = useState<ErrorsProps>({});
@@ -69,8 +69,8 @@ export default function Register() {
 
   return (
     <div className="flex flex-1 flex-col items-center">
-      <div className="flex w-full flex-col gap-10 p-20">
-        <h1 className="text-center text-2xl font-bold">Create an Account</h1>
+      <div className="flex w-full flex-col gap-10 px-10 py-15">
+        <h1 className="text-center text-3xl font-bold">Create an Account</h1>
 
         <form onSubmit={handleForm} className="flex flex-col gap-5">
           <div className="flex flex-col gap-1">
@@ -80,7 +80,7 @@ export default function Register() {
               type="email"
               name="email"
               id="email"
-              className="rounded-md border bg-white py-1 pl-2"
+              className="outline-my-orange w-full rounded-md border border-gray-400 bg-white p-2 pl-3 placeholder:text-gray-400"
               onChange={handleChange}
               value={user.email}
             />
@@ -95,7 +95,7 @@ export default function Register() {
               type="password"
               name="password"
               id="password"
-              className="rounded-md border bg-white py-1 pl-2"
+              className="outline-my-orange w-full rounded-md border border-gray-400 bg-white p-2 pl-3 placeholder:text-gray-400"
               onChange={handleChange}
               value={user.password}
             />
@@ -103,7 +103,7 @@ export default function Register() {
               <p className="text-sm text-red-500">{errors.password}</p>
             )}
           </div>
-          <button className="bg-my-orange mt-5 rounded-md p-2 font-bold text-white">
+          <button className="bg-my-orange mt-5 rounded-md p-4 text-white">
             {loadingReg ? "Creating..." : "Sign Up!"}
           </button>
         </form>
