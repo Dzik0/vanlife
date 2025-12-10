@@ -3,11 +3,15 @@
 @import "tailwindcss";
 
 @theme {
+  /* COLORS */
   --color-my-beige: #fff7ed;
   --color-my-dark-beige: #ffead0;
   --color-my-darker-beige: #ffddb2;
   --color-my-orange: #ff8c38;
   --color-my-yellow: #ffcc8d;
+
+  /* BREAKPOINTS */
+  --breakpoint-xl: 900px;
 }
 
 * {
