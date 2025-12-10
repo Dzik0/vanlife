@@ -117,7 +117,7 @@ export default function Vans() {
       )}
 
       {filteredVans.length > 0 && (
-        <div className="grid grid-cols-1 gap-15">
+        <div className="grid grid-cols-1 gap-15 md:grid-cols-2">
           {filteredVans.map((van) => (
             <Link
               to={van.id.toLocaleString()}
