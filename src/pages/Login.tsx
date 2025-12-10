@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { useAuthContext } from "../components/AuthProvider";
+import { useAuthContext } from "../providers/AuthProvider";
 
 interface LoginProps {
   email: string;

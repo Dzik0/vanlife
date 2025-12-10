@@ -1,6 +1,6 @@
 import { Link, useLocation, useParams } from "react-router";
-import { type Van } from "../../functions/dataFunctions";
-import { useVans } from "../../components/VansProvider";
+import { type Van } from "../../types/types";
+import { useVans } from "../../providers/VansProvider";
 
 export default function Van() {
   const location = useLocation();

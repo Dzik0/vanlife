@@ -1,10 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --color-my-beige: #fff7ed;
+  --color-my-dark-beige: #ffead0;
+  --color-my-darker-beige: #ffddb2;
+  --color-my-orange: #ff8c38;
+  --color-my-yellow: #ffcc8d;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
+  font-family: "Inter", sans-serif;
   min-height: 100vh;
 }
 
@@ -14,4 +25,10 @@ img {
 
 button {
   font-family: inherit;
+}
+
+#holder {
+  background-image: url("/mountainBg.png");
+  background-position: top;
+  background-size: cover;
 }

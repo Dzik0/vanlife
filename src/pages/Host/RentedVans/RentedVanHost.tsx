@@ -5,7 +5,7 @@ import {
   Outlet,
   useOutletContext,
 } from "react-router";
-import type { Van } from "../../../functions/dataFunctions";
+import type { Van } from "../../../types/types";
 import { useOwnedVans } from "../../../components/HostLayout";
 
 interface OutletContextProps {

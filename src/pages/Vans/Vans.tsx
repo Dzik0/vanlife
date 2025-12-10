@@ -1,6 +1,6 @@
 import SingleVanItem from "../../components/SingleVanItem";
 import { Link, useSearchParams } from "react-router";
-import { useVans } from "../../components/VansProvider";
+import { useVans } from "../../providers/VansProvider";
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,7 +42,7 @@ export default function Vans() {
   if (error) {
     return (
       <p className="p-5 text-center">
-        ERROR: Cannot fetch the data, please try again later. Sorry :(
+        ERROR: Cannot fetch the data, please try again later. Sorry!
       </p>
     );
   }

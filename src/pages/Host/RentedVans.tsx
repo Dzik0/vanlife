@@ -1,5 +1,5 @@
 import { useOwnedVans } from "../../components/HostLayout";
-import SingleVan from "./componenets/SingleVan";
+import SingleVan from "../../components/SingleVan";
 import { Link } from "react-router";
 
 export default function RentedVans() {
