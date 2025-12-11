@@ -10,7 +10,7 @@ export default function SingleVanItem({
 }: SingleVanProps) {
   return (
     <div className="flex flex-col">
-      <div className="h-70">
+      <div className="h-100">
         <img
           src={imageUrl}
           alt="Van image"

@@ -6,7 +6,7 @@ interface SingleVanProps {
 
 export default function SingleVan({ van }: SingleVanProps) {
   return (
-    <div className="flex flex-row items-center justify-between rounded-md bg-white p-4">
+    <div className="flex flex-row items-center justify-between gap-20 rounded-md bg-white p-4">
       <div className="flex flex-row items-center gap-4">
         <div className="h-15 w-15">
           <img
