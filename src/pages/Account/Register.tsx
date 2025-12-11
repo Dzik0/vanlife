@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { auth, db } from "../API/Api";
+import { auth, db } from "../../API/Api";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useAuthContext } from "../providers/AuthProvider";
+import { useAuthContext } from "../../providers/AuthProvider";
 import { Navigate } from "react-router";
 import { doc, setDoc } from "firebase/firestore";
 

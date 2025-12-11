@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, Navigate, useLocation } from "react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../API/Api";
-import { useAuthContext } from "../providers/AuthProvider";
+import { auth } from "../../API/Api";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 interface User {
   email: string;
@@ -127,8 +127,13 @@ export default function Login() {
           {logging ? "Logging..." : "Log in"}
         </button>
       </form>
-      <div className="cursor-pointer text-center underline underline-offset-2 hover:font-bold">
-        <Link to="/register">Don't have an account? Register now!</Link>
+      <div className="flex flex-col gap-2">
+        <div className="cursor-pointer text-center underline underline-offset-2 hover:font-bold">
+          <Link to="/recover">Forgot password?</Link>
+        </div>
+        <div className="cursor-pointer text-center underline underline-offset-2 hover:font-bold">
+          <Link to="/register">Don't have an account? Register now!</Link>
+        </div>
       </div>
     </div>
   );

@@ -15,11 +15,12 @@ import RentedVanPricing from "./pages/Host/RentedVans/RentedVanPricing";
 import RentedVanPhotos from "./pages/Host/RentedVans/RentedVanPhotos";
 import VansProvider from "./providers/VansProvider";
 import WrongPage from "./pages/WrongPage";
-import Login from "./pages/Login";
+import Login from "./pages/Account/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./providers/AuthProvider";
-import Register from "./pages/Register";
+import Register from "./pages/Account/Register";
 import Details from "./pages/Host/Details";
+import Recover from "./pages/Account/Recover";
 
 export default function App() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
               <Route path="vans" element={<Vans />} />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
+              <Route path="recover" element={<Recover />} />
               <Route path="vans/:id" element={<Van />} />
               <Route path="*" element={<WrongPage />} />
             </Route>
