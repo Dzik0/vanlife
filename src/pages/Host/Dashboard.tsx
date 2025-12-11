@@ -4,7 +4,7 @@ import { useOwnedVans } from "../../components/HostLayout";
 import { useAuthContext } from "../../providers/AuthProvider";
 
 export default function Dashboard() {
-  const { myVans, loading, error } = useOwnedVans();
+  const { hostVans, loading, error } = useOwnedVans();
   const { profile } = useAuthContext();
   if (error) console.log("Error:", error);
 
@@ -47,15 +47,15 @@ export default function Dashboard() {
 
         {loading && <p className="py-5 text-center">Loading your vans...🚐</p>}
 
-        {myVans.length === 0 && !loading && (
+        {hostVans.length === 0 && !loading && (
           <p className="py-5 text-center">
             You don't have any vans listed at this moment!
           </p>
         )}
 
-        {myVans.length > 0 && (
+        {hostVans.length > 0 && (
           <div className="flex flex-col gap-5">
-            {myVans.map((van) => (
+            {hostVans.map((van) => (
               <Link key={van.id} to={`/host/vans/${van.id}`}>
                 <SingleVan van={van} />
               </Link>

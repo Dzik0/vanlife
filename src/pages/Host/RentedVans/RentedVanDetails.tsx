@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useVan } from "./RentedVanHost";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../API/Api";
+import { useVans } from "../../../providers/VansProvider";
+import { useAuthContext } from "../../../providers/AuthProvider";
 
 export default function RentedVanDetails() {
   const { van } = useVan();
+  const { loadHostVans } = useVans();
+  const { profile } = useAuthContext();
   const [editing, setEditing] = useState(false);
-  const [needRefresh, setNeedRefresh] = useState(false);
   const [details, setDetails] = useState({
     name: van.name,
     type: van.type,
@@ -24,6 +27,7 @@ export default function RentedVanDetails() {
     await updateDoc(ref, obj);
 
     setEditing(false);
+    loadHostVans(profile.id);
   }
 
   async function handleForm(e: React.FormEvent<HTMLFormElement>) {
@@ -32,8 +36,7 @@ export default function RentedVanDetails() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
 
-    handleUpdate(data);
-    setNeedRefresh(true);
+    await handleUpdate(data);
   }
 
   return (
@@ -51,7 +54,7 @@ export default function RentedVanDetails() {
           </p>
           <div>
             <button
-              className="bg-my-orange rounded-md p-2 px-10 text-white"
+              className="bg-my-orange cursor-pointer rounded-md p-2 px-10 text-white"
               onClick={() => {
                 setEditing(true);
               }}
@@ -59,11 +62,6 @@ export default function RentedVanDetails() {
               Edit
             </button>
           </div>
-          {needRefresh && (
-            <p className="text-my-orange text-center text-xl font-bold">
-              Please refresh the page the get the updated information
-            </p>
-          )}
         </div>
       ) : (
         <div className="flex flex-col gap-4 text-sm">
@@ -102,7 +100,7 @@ export default function RentedVanDetails() {
             </label>
 
             <div>
-              <button className="bg-my-orange mt-5 rounded-md p-2 px-10 text-white">
+              <button className="bg-my-orange mt-5 cursor-pointer rounded-md p-2 px-10 text-white">
                 Save changes
               </button>
             </div>

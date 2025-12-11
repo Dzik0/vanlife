@@ -32,56 +32,65 @@ export default function Details() {
     );
   }
 
-  return (
-    <div className="bg-my-beige flex-1">
-      {!editing ? (
-        <div>
-          <h1>Your details:</h1>
-          <p>Id: {profile.id}</p>
-          <p>Name: {profile.name}</p>
-          <p>Phone: {profile.phone}</p>
-        </div>
-      ) : (
-        <div className="flex flex-col gap-2">
+  if (editing) {
+    return (
+      <div className="bg-my-beige flex-1 p-5">
+        <h1 className="mb-10 text-xl font-bold">Edit your details</h1>
+        <div className="flex flex-col gap-5">
           <label htmlFor="">
-            Name:
+            <span className="mr-5 font-bold">Name:</span>
             <input
               type="text"
               name="name"
-              className="border"
+              className="border-my-orange rounded-md border bg-white p-1 pl-3"
               onChange={handleChange}
               value={details.name}
             />
           </label>
           <label htmlFor="">
-            Phone:
+            <span className="mr-5 font-bold">Phone:</span>
             <input
-              type="text"
+              type="number"
               name="phone"
-              className="border"
+              className="border-my-orange rounded-md border bg-white p-1 pl-3"
               onChange={handleChange}
               value={details.phone}
             />
           </label>
         </div>
-      )}
-      {!editing ? (
         <button
-          className="bg-my-orange p-1 font-bold text-white"
-          onClick={() => {
-            setEditing((pS) => !pS);
-          }}
-        >
-          Edit details
-        </button>
-      ) : (
-        <button
-          className="bg-my-orange p-1 font-bold text-white"
+          className="bg-my-orange mt-10 cursor-pointer rounded-md p-1 px-4 font-bold text-white"
           onClick={handleUpdate}
         >
           Save details
         </button>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-my-beige flex-1 p-5">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl font-bold">Your details:</h1>
+        <p>
+          <span className="font-bold">Id:</span> {profile.id}
+        </p>
+        <p>
+          <span className="font-bold">Name:</span> {profile.name}
+        </p>
+        <p>
+          <span className="font-bold">Phone:</span> {profile.phone}
+        </p>
+      </div>
+
+      <button
+        className="bg-my-orange mt-5 cursor-pointer rounded-md p-1 px-3 font-bold text-white"
+        onClick={() => {
+          setEditing((pS) => !pS);
+        }}
+      >
+        Edit details
+      </button>
     </div>
   );
 }

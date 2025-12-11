@@ -6,7 +6,8 @@ import {
   type ReactNode,
 } from "react";
 import { type Van } from "../types/types";
-import { getVans } from "../API/Api";
+import { getHostVans, getVans } from "../API/Api";
+import { useAuthContext } from "./AuthProvider";
 
 interface VansProviderProps {
   children: ReactNode;
@@ -16,12 +17,16 @@ interface VansContextProps {
   vans: Van[];
   loading: boolean;
   error: string | null;
+  hostVans: Van[];
+  loadHostVans: (id: string) => Promise<void>;
 }
 
 const VansContext = createContext<VansContextProps | undefined>(undefined);
 
 export default function VansProvider({ children }: VansProviderProps) {
+  const { loggedUser } = useAuthContext();
   const [vans, setVans] = useState<Van[]>([]);
+  const [hostVans, setHostVans] = useState<Van[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,8 +49,17 @@ export default function VansProvider({ children }: VansProviderProps) {
     getData();
   }, []);
 
+  async function loadHostVans(id: string) {
+    if (!loggedUser) return;
+    const vans = await getHostVans(id);
+
+    setHostVans(vans);
+  }
+
   return (
-    <VansContext.Provider value={{ vans, loading, error }}>
+    <VansContext.Provider
+      value={{ vans, loading, error, hostVans, loadHostVans }}
+    >
       {children}
     </VansContext.Provider>
   );

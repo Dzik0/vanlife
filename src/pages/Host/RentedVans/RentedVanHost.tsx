@@ -13,12 +13,12 @@ interface OutletContextProps {
 }
 
 export default function RentedVanHost() {
-  const { myVans, loading, error } = useOwnedVans();
+  const { hostVans, loading, error } = useOwnedVans();
 
   if (error) console.log("Error:", error);
   const { id } = useParams();
 
-  const van = myVans.find((van) => van.id.toLocaleString() === id);
+  const van = hostVans.find((van) => van.id.toLocaleString() === id);
 
   const activeStyle = {
     fontWeight: "600",

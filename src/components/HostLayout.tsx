@@ -1,14 +1,15 @@
 import { NavLink, Outlet, useOutletContext } from "react-router";
 import { useVans } from "../providers/VansProvider";
 import { type Van } from "../types/types";
-import { auth } from "../API/Api";
+import { useAuthContext } from "../providers/AuthProvider";
+import { useEffect } from "react";
 
 interface StyleProps {
   isActive: boolean;
 }
 
 interface OutletContextProps {
-  myVans: Van[];
+  hostVans: Van[];
   loading: boolean;
   error: string | null;
 }
@@ -19,12 +20,12 @@ export default function HostLayout() {
     color: "black",
   };
 
-  const { vans, loading, error } = useVans();
+  const { loading, error, hostVans, loadHostVans } = useVans();
+  const { profile } = useAuthContext();
 
-  const hostId = auth.currentUser?.uid;
-  console.log(auth.currentUser?.uid);
-
-  const myVans = vans.filter((van) => van.hostId === hostId);
+  useEffect(() => {
+    if (profile.id) loadHostVans(profile.id);
+  }, [profile.id, loadHostVans]);
 
   return (
     <>
@@ -77,7 +78,7 @@ export default function HostLayout() {
         </NavLink>
       </nav>
       <Outlet
-        context={{ myVans, loading, error } satisfies OutletContextProps}
+        context={{ hostVans, loading, error } satisfies OutletContextProps}
       />
     </>
   );

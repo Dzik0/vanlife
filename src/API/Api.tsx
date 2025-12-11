@@ -51,7 +51,10 @@ export async function getVanId(id: string) {
 export async function getHostVans(id: string) {
   const q = query(collection(db, "vans"), where("hostId", "==", id));
   const snapshot = await getDocs(q);
-  const vans = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  const vans: Van[] = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<Van, "id">),
+  }));
 
   return vans;
 }

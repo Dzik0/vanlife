@@ -24,8 +24,8 @@ import Recover from "./pages/Account/Recover";
 
 export default function App() {
   return (
-    <VansProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <VansProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -55,7 +55,7 @@ export default function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </AuthProvider>
-    </VansProvider>
+      </VansProvider>
+    </AuthProvider>
   );
 }

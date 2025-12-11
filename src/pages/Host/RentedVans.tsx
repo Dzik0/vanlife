@@ -3,7 +3,7 @@ import SingleVan from "../../components/SingleVan";
 import { Link } from "react-router";
 
 export default function RentedVans() {
-  const { myVans, loading, error } = useOwnedVans();
+  const { hostVans, loading, error } = useOwnedVans();
 
   if (error) console.log("Error:", error);
   return (
@@ -13,15 +13,15 @@ export default function RentedVans() {
       </div>
       {loading && <p className="py-5 text-center">Loading your vans...🚐</p>}
 
-      {myVans.length === 0 && !loading && (
+      {hostVans.length === 0 && !loading && (
         <p className="py-5 text-center">
           You don't have any vans listed at this moment!
         </p>
       )}
 
-      {myVans.length > 0 && (
+      {hostVans.length > 0 && (
         <div className="flex flex-col gap-5">
-          {myVans.map((van) => (
+          {hostVans.map((van) => (
             <Link to={`${van.id}`} key={van.id}>
               <SingleVan van={van} />
             </Link>
