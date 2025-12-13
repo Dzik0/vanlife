@@ -28,6 +28,14 @@ export default function RentedVans() {
           ))}
         </div>
       )}
+      <div>
+        <Link
+          className="bg-my-orange rounded-md p-2 px-5 font-bold text-white"
+          to="../new/van"
+        >
+          Add Van
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useVan } from "./RentedVanHost";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../API/Api";
 import { useVans } from "../../../providers/VansProvider";
 import { useAuthContext } from "../../../providers/AuthProvider";
+import { useNavigate } from "react-router";
 
 interface DetailProps {
   name: string;
@@ -16,6 +17,7 @@ interface ErrorProps {
 }
 
 export default function RentedVanDetails() {
+  const navigate = useNavigate();
   const { van } = useVan();
   const { loadHostVans } = useVans();
   const { profile } = useAuthContext();
@@ -26,6 +28,8 @@ export default function RentedVanDetails() {
     description: van.description,
   });
   const [errors, setErrors] = useState<ErrorProps>({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -64,10 +68,56 @@ export default function RentedVanDetails() {
     await handleUpdate(data);
   }
 
+  async function handleDelete() {
+    const vanRef = doc(db, "vans", van.id);
+
+    try {
+      setDeleting(true);
+      await deleteDoc(vanRef);
+      await loadHostVans(profile.id);
+      navigate("/host/vans");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   return (
     <div>
       {!editing ? (
-        <div className="flex flex-col gap-4 text-sm">
+        <div className="relative flex flex-col gap-4 text-sm">
+          {confirmDelete && (
+            <div className="bg-my-orange absolute top-0 right-0 bottom-0 left-0 flex flex-col items-center justify-center gap-4 rounded-md text-xl text-white">
+              {!deleting ? (
+                <>
+                  {" "}
+                  <div className="text-center">
+                    <p>Are you sure?</p>
+                    <p>This action cannot be undone</p>
+                  </div>
+                  <div className="flex gap-5">
+                    <button
+                      className="text-my-orange cursor-pointer rounded-md border border-white bg-white p-1 px-3"
+                      onClick={handleDelete}
+                    >
+                      YES
+                    </button>
+                    <button
+                      className="text-my-orange cursor-pointer rounded-md border border-white bg-white p-1 px-3"
+                      onClick={() => {
+                        setConfirmDelete(false);
+                      }}
+                    >
+                      NO
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="text-xl font-bold text-white">Deleting...</p>
+              )}
+            </div>
+          )}
           <h3>
             <span className="font-bold">Name:</span> {van?.name}
           </h3>
@@ -85,6 +135,16 @@ export default function RentedVanDetails() {
               }}
             >
               Edit
+            </button>
+          </div>
+          <div>
+            <button
+              className="bg-my-orange cursor-pointer rounded-md p-2 px-10 text-white"
+              onClick={() => {
+                setConfirmDelete(true);
+              }}
+            >
+              Delete van
             </button>
           </div>
         </div>

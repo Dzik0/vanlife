@@ -21,6 +21,7 @@ import AuthProvider from "./providers/AuthProvider";
 import Register from "./pages/Account/Register";
 import Details from "./pages/Host/Details";
 import Recover from "./pages/Account/Recover";
+import NewVan from "./pages/Host/NewVan";
 
 export default function App() {
   return (
@@ -33,11 +34,11 @@ export default function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="host" element={<HostLayout />}>
                   <Route index element={<Dashboard />} />
-
                   <Route path="income" element={<Income />} />
                   <Route path="reviews" element={<Reviews />} />
                   <Route path="vans" element={<RentedVans />} />
                   <Route path="details" element={<Details />} />
+                  <Route path="new/van" element={<NewVan />} />
                   <Route path="vans/:id" element={<RentedVanHost />}>
                     <Route index element={<RentedVanDetails />} />
                     <Route path="pricing" element={<RentedVanPricing />} />

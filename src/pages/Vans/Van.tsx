@@ -77,12 +77,12 @@ export default function Van() {
           <div className="flex flex-row flex-wrap gap-5">
             {images.map((url, i) => (
               <button
-                className={`${currentImg === i ? "shadow-my-orange shadow-[0px_0px_5px_3px]" : ""} cursor-pointer overflow-hidden rounded-md`}
+                className={`${currentImg === i ? "shadow-my-orange shadow-[0px_0px_5px_3px]" : ""} h-30 w-30 cursor-pointer overflow-hidden rounded-md`}
                 onClick={() => {
                   setCurrentImg(i);
                 }}
               >
-                <img src={url} alt="" className="h-30 w-30" />
+                <img src={url} alt="" className="h-full w-full object-cover" />
               </button>
             ))}
           </div>
@@ -98,7 +98,12 @@ export default function Van() {
               <span className="text-sm">/day</span>
             </p>
             <p className="text-sm">{van.description}</p>
-            <button className="bg-my-orange mt-5 rounded-md p-3 text-white">
+            <button
+              className="bg-my-orange mt-5 cursor-pointer rounded-md p-3 text-white hover:opacity-80"
+              onClick={() => {
+                alert("Coming soon");
+              }}
+            >
               Rent this van
             </button>
           </div>
