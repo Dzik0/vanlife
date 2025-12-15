@@ -4,7 +4,7 @@ import { useVans } from "../../providers/VansProvider";
 import { useEffect } from "react";
 
 export default function Vans() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   //
   const { vans, loading, error, getData } = useVans();
