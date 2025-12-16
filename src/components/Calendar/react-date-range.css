@@ -1,0 +1,35 @@
+/* Outer calendar */
+.rdrCalendarWrapper {
+  @apply text-sm text-slate-800;
+}
+
+/* Month and weekday headings */
+.rdrMonthName {
+  @apply mb-2 text-center text-xs font-semibold text-slate-500 uppercase;
+}
+.rdrWeekDay {
+  @apply text-[10px] font-medium text-slate-400;
+}
+
+/* Day cells */
+.rdrDay {
+  @apply rounded-md;
+}
+.rdrDayNumber span {
+  @apply h-7 w-7 rounded-md leading-7;
+}
+
+/* Selected range */
+.rdrDayStartPreview,
+.rdrDayEndPreview,
+.rdrInRange {
+  @apply bg-my-orange/20;
+}
+.rdrDayNumber span.rdrSelected {
+  @apply bg-my-orange text-white;
+}
+
+/* Disabled (past) dates */
+.rdrDayDisabled {
+  @apply text-slate-300;
+}

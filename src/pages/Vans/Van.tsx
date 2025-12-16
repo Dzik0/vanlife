@@ -3,6 +3,7 @@ import { type Van } from "../../types/types";
 import { useVans } from "../../providers/VansProvider";
 import { useEffect, useState } from "react";
 import { showImages } from "../../API/Api";
+import BookingCalendar from "../../components/Calendar/BookingCalendar";
 
 export default function Van() {
   const [images, setImages] = useState<string[]>([]);
@@ -106,6 +107,9 @@ export default function Van() {
             >
               Rent this van
             </button>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-5">
+            <BookingCalendar vanId={id} />
           </div>
         </div>
       </div>
