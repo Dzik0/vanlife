@@ -22,40 +22,45 @@ import Register from "./pages/Account/Register";
 import Details from "./pages/Host/Details";
 import Recover from "./pages/Account/Recover";
 import NewVan from "./pages/Host/NewVan";
+import Bookings from "./pages/Host/Bookings/Bookings";
+import BookingsProvider from "./providers/BookingsProvider";
 
 export default function App() {
   return (
     <AuthProvider>
       <VansProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="host" element={<HostLayout />}>
-                  <Route index element={<Dashboard />} />
-                  <Route path="income" element={<Income />} />
-                  <Route path="reviews" element={<Reviews />} />
-                  <Route path="vans" element={<RentedVans />} />
-                  <Route path="details" element={<Details />} />
-                  <Route path="new/van" element={<NewVan />} />
-                  <Route path="vans/:id" element={<RentedVanHost />}>
-                    <Route index element={<RentedVanDetails />} />
-                    <Route path="pricing" element={<RentedVanPricing />} />
-                    <Route path="photos" element={<RentedVanPhotos />} />
+        <BookingsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="host" element={<HostLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="income" element={<Income />} />
+                    <Route path="reviews" element={<Reviews />} />
+                    <Route path="vans" element={<RentedVans />} />
+                    <Route path="bookings" element={<Bookings />} />
+                    <Route path="details" element={<Details />} />
+                    <Route path="new/van" element={<NewVan />} />
+                    <Route path="vans/:id" element={<RentedVanHost />}>
+                      <Route index element={<RentedVanDetails />} />
+                      <Route path="pricing" element={<RentedVanPricing />} />
+                      <Route path="photos" element={<RentedVanPhotos />} />
+                    </Route>
                   </Route>
                 </Route>
+                <Route path="about" element={<About />} />
+                <Route path="vans" element={<Vans />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="recover" element={<Recover />} />
+                <Route path="vans/:id" element={<Van />} />
+                <Route path="*" element={<WrongPage />} />
               </Route>
-              <Route path="about" element={<About />} />
-              <Route path="vans" element={<Vans />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="recover" element={<Recover />} />
-              <Route path="vans/:id" element={<Van />} />
-              <Route path="*" element={<WrongPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </BookingsProvider>
       </VansProvider>
     </AuthProvider>
   );

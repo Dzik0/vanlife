@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export type Van = {
   id: string;
   description: string;
@@ -14,4 +16,14 @@ export type UserFirebase = {
   name: string;
   email: string;
   createdAt: string;
+};
+
+export type BookingFirebase = {
+  id: string;
+  userId: string;
+  vanId: string;
+  startDate: Timestamp;
+  endDate: Timestamp;
+  createdAt: Timestamp;
+  status: string;
 };

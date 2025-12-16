@@ -78,6 +78,15 @@ export default function HostLayout() {
         >
           Details
         </NavLink>
+        <NavLink
+          to="bookings"
+          className="hover:text-black hover:underline"
+          style={({ isActive }: StyleProps) =>
+            isActive ? activeLink : undefined
+          }
+        >
+          Bookings
+        </NavLink>
       </nav>
       <Outlet
         context={{ hostVans, loading, error } satisfies OutletContextProps}

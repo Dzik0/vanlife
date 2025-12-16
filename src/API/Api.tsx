@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { type Van } from "../types/types";
+import { type BookingFirebase, type Van } from "../types/types";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 // Your web app's Firebase configuration
@@ -70,6 +70,20 @@ export async function getUserDetails(id: string) {
   const userDetails = { ...snapshot.data(), id: id };
 
   return userDetails;
+}
+
+export async function getRentedVans(id: string) {
+  if (id === "") {
+    throw new Error("This function needs ID!");
+  }
+
+  const q = query(collection(db, "bookings"), where("userId", "==", id));
+  const snapshot = await getDocs(q);
+  const vans: BookingFirebase[] = snapshot.docs.map((item) => ({
+    id: item.id,
+    ...(item.data() as Omit<BookingFirebase, "id">),
+  }));
+  return vans;
 }
 
 //AUTH
