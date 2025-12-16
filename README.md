@@ -3,9 +3,11 @@
 A full-stack **van rental marketplace** built with **React**, **TypeScript**, **Firebase**, and **React Router**.  
 Users can browse vans, hosts can manage listings, with full authentication and protected routes. **Live on Netlify** with Firebase backend.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/uniquehttps://app.netlify.com/sites/vanlife-explore 📸 Preview
+## 📸 Preview
 
-![Screenshot](./ Demo:\*\* [vanlife-explore-vans.netlify.app](https://vanlife-explore-vans.netlify.app/)
+![Vanlife Page Screenshot](/screenshot.jpg)
+
+LIVE: [https://p-glazowski.github.io/vanlife](https://vanlife-explore-vans.netlify.app/)
 
 ---
 
