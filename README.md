@@ -7,7 +7,7 @@ Users can browse vans, hosts can manage listings, with full authentication and p
 
 ![Vanlife Page Screenshot](/screenshot.jpg)
 
-LIVE: [https://p-glazowski.github.io/vanlife](https://vanlife-explore-vans.netlify.app/)
+LIVE: [Vanlife Netlify Page](https://vanlife-explore-vans.netlify.app/)
 
 ---
 
