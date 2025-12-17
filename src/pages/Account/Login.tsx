@@ -17,7 +17,8 @@ interface ErrorProps {
 
 export default function Login() {
   const location = useLocation();
-  /* const from = location.state?.from.pathname || "/"; */
+  /*   const from = location.state?.from || "/host"; */
+  const from = location.state?.pathname || "/host";
   const [user, setUser] = useState<User>({ email: "", password: "" });
   const [logging, setLogging] = useState(false);
   const [errors, setErrors] = useState<ErrorProps>({});
@@ -83,7 +84,7 @@ export default function Login() {
 
   if (loading) return <p>LOADING..</p>;
 
-  if (loggedUser) return <Navigate to="/host" replace />;
+  if (loggedUser) return <Navigate to={from} replace />;
 
   return (
     <div className="bg-my-beige flex flex-1 flex-col gap-15 px-10 py-15">

@@ -27,3 +27,12 @@ export type BookingFirebase = {
   createdAt: Timestamp;
   status: string;
 };
+
+export type VanImages = {
+  vanId: string;
+  vanPhotos: string[];
+};
+
+export type VanWithPhotos = Van & {
+  photos: string[];
+};

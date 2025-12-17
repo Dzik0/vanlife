@@ -1,32 +1,15 @@
-import { useEffect, useState } from "react";
-import { type Van } from "../types/types";
-import { showImages } from "../API/Api";
+import { type VanWithPhotos } from "../types/types";
 
 /* type SingleVanProps = Omit<Van, "id" | "description" | "hostId">; */
 interface SingleVanProps {
-  van: Van;
+  van: VanWithPhotos;
 }
 export default function SingleVanItem({ van }: SingleVanProps) {
-  const [image, setImage] = useState<string>();
-
-  useEffect(() => {
-    async function loadImage() {
-      try {
-        const img = await showImages(van.id);
-        setImage(img[0]);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    loadImage();
-  }, []);
-
   return (
     <div className="flex flex-col">
       <div className="h-100">
         <img
-          src={image}
+          src={van.photos[0]}
           alt="Van image"
           className="h-full w-full rounded-md object-cover"
         />

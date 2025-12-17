@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -10,7 +11,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { type BookingFirebase, type Van } from "../types/types";
+import { type BookingFirebase, type Van, type VanImages } from "../types/types";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 // Your web app's Firebase configuration
@@ -86,15 +87,51 @@ export async function getRentedVans(id: string) {
   return vans;
 }
 
+//DATABASE BOOKINGS
+export async function bookVan(details: any) {
+  const docRef = collection(db, "bookings");
+  try {
+    await addDoc(docRef, details);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 //AUTH
 export const auth = getAuth(app);
 
 //STORE
 export const storage = getStorage(app);
 
-export async function showImages(vanId: string): Promise<string[]> {
+export async function getSingleVanImages(vanId: string): Promise<string[]> {
   const imageListRef = ref(storage, `vansphotos/van-${vanId}`);
   const res = await listAll(imageListRef);
   const list = await Promise.all(res.items.map(getDownloadURL));
   return list;
+}
+
+export async function getAllImages() {
+  const rootRef = ref(storage, "vansphotos");
+  const res = await listAll(rootRef);
+
+  const result: VanImages[] = [];
+
+  // Each prefix is like vansphotos/van-123
+  for (const folderRef of res.prefixes) {
+    // folderRef.name will be "van-123"
+    const folderName = folderRef.name; // e.g. "van-123"
+
+    // Extract vanId if you want just "123"
+    const vanId = folderName.replace("van-", "");
+
+    const folderRes = await listAll(folderRef);
+    const urls = await Promise.all(folderRes.items.map(getDownloadURL));
+
+    result.push({
+      vanId,
+      vanPhotos: urls,
+    });
+  }
+
+  return result;
 }

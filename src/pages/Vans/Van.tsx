@@ -1,22 +1,17 @@
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { type Van } from "../../types/types";
 import { useVans } from "../../providers/VansProvider";
-import { useEffect, useState } from "react";
-import { showImages } from "../../API/Api";
+import { useState } from "react";
 import BookingCalendar from "../../components/Calendar/BookingCalendar";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 export default function Van() {
-  const [images, setImages] = useState<string[]>([]);
   const [currentImg, setCurrentImg] = useState(0);
+  const { profile } = useAuthContext();
   const location = useLocation();
+  const from = location;
   const search = `?${location.state?.search}` || "";
-  /*   const searchName = search
-    .split("&")
-    .splice(0, 1)
-    .toString()
-    .split("")
-    .splice(6)
-    .join(""); */
+  const navigate = useNavigate();
 
   const searchName: "simple" | "rugged" | "luxury" | "all" =
     location.state?.type || "all";
@@ -27,18 +22,6 @@ export default function Van() {
   const { id } = useParams();
 
   const van = vans.find((item) => item.id.toLocaleString() === id);
-
-  useEffect(() => {
-    async function loadImages() {
-      if (!id) return;
-      const imgs = await showImages(id);
-      setImages(imgs);
-    }
-
-    loadImages();
-  }, []);
-
-  console.log(images);
 
   if (loading) {
     return <p className="bg-my-beige py-10 text-center">LOADING....🚐</p>;
@@ -70,14 +53,15 @@ export default function Van() {
         <div className="flex flex-col gap-8">
           <div className="overflow-hidden rounded-md">
             <img
-              src={images[currentImg]}
+              src={van.photos[currentImg]}
               alt="Van image"
               className="h-full w-full object-cover"
             />
           </div>
           <div className="flex flex-row flex-wrap gap-5">
-            {images.map((url, i) => (
+            {van.photos.map((url, i) => (
               <button
+                key={i}
                 className={`${currentImg === i ? "shadow-my-orange shadow-[0px_0px_5px_3px]" : ""} h-30 w-30 cursor-pointer overflow-hidden rounded-md`}
                 onClick={() => {
                   setCurrentImg(i);
@@ -99,18 +83,22 @@ export default function Van() {
               <span className="text-sm">/day</span>
             </p>
             <p className="text-sm">{van.description}</p>
-            <button
-              className="bg-my-orange mt-5 cursor-pointer rounded-md p-3 text-white hover:opacity-80"
-              onClick={() => {
-                alert("Coming soon");
-              }}
-            >
-              Rent this van
-            </button>
+            {!profile && (
+              <button
+                className="bg-my-orange mt-5 cursor-pointer rounded-md p-3 text-white hover:opacity-80"
+                onClick={() => {
+                  navigate("/login", { state: from });
+                }}
+              >
+                Rent this van
+              </button>
+            )}
           </div>
-          <div className="flex flex-col items-center justify-center gap-5">
-            <BookingCalendar vanId={id} />
-          </div>
+          {profile && (
+            <div className="flex flex-col items-center justify-center gap-5">
+              <BookingCalendar vanId={id} />
+            </div>
+          )}
         </div>
       </div>
     )

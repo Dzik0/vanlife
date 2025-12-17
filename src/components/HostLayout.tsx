@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useOutletContext } from "react-router";
 import { useVans } from "../providers/VansProvider";
-import { type Van } from "../types/types";
+import { type VanWithPhotos } from "../types/types";
 import { useAuthContext } from "../providers/AuthProvider";
 import { useEffect } from "react";
 
@@ -9,7 +9,7 @@ interface StyleProps {
 }
 
 interface OutletContextProps {
-  hostVans: Van[];
+  hostVans: VanWithPhotos[];
   loading: boolean;
   error: string | null;
 }

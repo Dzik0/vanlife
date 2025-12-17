@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useVan } from "./RentedVanHost";
 import { deleteObject, ref, uploadBytes } from "firebase/storage";
-import { storage, showImages } from "../../../API/Api";
+import { storage, getSingleVanImages } from "../../../API/Api";
 
 export default function RentedVanPhotos() {
   const { van } = useVan();
@@ -21,6 +21,7 @@ export default function RentedVanPhotos() {
       setSending(true);
       await uploadBytes(fileRef, file);
       await loadImages();
+      console.log("Uploaded!");
     } catch (err) {
       console.error(err);
     } finally {
@@ -42,7 +43,7 @@ export default function RentedVanPhotos() {
   }
 
   async function loadImages() {
-    const imageList = await showImages(van.id);
+    const imageList = await getSingleVanImages(van.id);
     setImages(imageList);
   }
 
