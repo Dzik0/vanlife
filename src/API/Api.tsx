@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -94,6 +95,15 @@ export async function bookVan(details: any) {
     await addDoc(docRef, details);
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function cancelBooking(id: any) {
+  const docRef = doc(db, "bookings", id);
+  try {
+    await deleteDoc(docRef);
+  } catch (err) {
+    console.log(err);
   }
 }
 

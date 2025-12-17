@@ -2,16 +2,28 @@ import { useEffect } from "react";
 import { useBookingsContext } from "../../../providers/BookingsProvider";
 import { useAuthContext } from "../../../providers/AuthProvider";
 import SingleBookedVan from "../../../components/Bookings/SingleBookedVan";
+import { cancelBooking } from "../../../API/Api";
 
 export default function Renting() {
-  const { getData, rentedVans } = useBookingsContext();
+  const { getRentedVansData, rentedVans } = useBookingsContext();
   const { profile } = useAuthContext();
+
+  async function handleCancelAction(vanId: string) {
+    try {
+      await cancelBooking(vanId);
+      getRentedVansData(profile.id);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   useEffect(() => {
     if (profile.id) {
-      getData(profile.id);
+      getRentedVansData(profile.id);
     }
   }, []);
+
+  if (rentedVans.length === 0) return;
 
   return (
     <div className="flex flex-col gap-4">
@@ -22,7 +34,11 @@ export default function Renting() {
       </div>
       <div className="flex flex-col gap-5">
         {rentedVans.map((van, i) => (
-          <SingleBookedVan bookedVan={van} key={i} />
+          <SingleBookedVan
+            bookedVan={van}
+            key={i}
+            handleCancelAction={handleCancelAction}
+          />
         ))}
       </div>
     </div>

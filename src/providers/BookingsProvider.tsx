@@ -7,7 +7,7 @@ interface BookingsProviderProps {
 }
 
 interface ContextProps {
-  getData: (id: string) => void;
+  getRentedVansData: (userId: string) => void;
   rentedVans: BookingFirebase[];
 }
 
@@ -18,7 +18,7 @@ export { BookingsContext };
 export default function BookingsProvider({ children }: BookingsProviderProps) {
   const [rentedVans, setRentedVans] = useState<BookingFirebase[]>([]);
 
-  async function getData(id: string) {
+  async function getRentedVansData(id: string) {
     try {
       const data = await getRentedVans(id);
       setRentedVans(data);
@@ -28,7 +28,7 @@ export default function BookingsProvider({ children }: BookingsProviderProps) {
   }
 
   return (
-    <BookingsContext.Provider value={{ getData, rentedVans }}>
+    <BookingsContext.Provider value={{ getRentedVansData, rentedVans }}>
       {children}
     </BookingsContext.Provider>
   );

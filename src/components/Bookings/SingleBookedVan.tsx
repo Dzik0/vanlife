@@ -4,9 +4,13 @@ import { format } from "date-fns";
 
 interface SingleBookedVanProps {
   bookedVan: BookingFirebase;
+  handleCancelAction: (userId: string) => void;
 }
 
-export default function SingleBookedVan({ bookedVan }: SingleBookedVanProps) {
+export default function SingleBookedVan({
+  bookedVan,
+  handleCancelAction,
+}: SingleBookedVanProps) {
   const { vans } = useVans();
   const foundVan = vans.find((van) => van.id === bookedVan.vanId);
   const start = bookedVan.startDate.toDate();
@@ -29,7 +33,14 @@ export default function SingleBookedVan({ bookedVan }: SingleBookedVanProps) {
         {format(start, "dd.MM.yyyy")} - {format(end, "dd.MM.yyyy")}
       </div>
       <div>STATUS: {bookedVan.status}</div>
-      <button className="rounded-md bg-red-500 p-1 text-white">Cancel</button>
+      <button
+        className="rounded-md bg-red-500 p-1 px-2 text-white"
+        onClick={() => {
+          handleCancelAction(bookedVan.id);
+        }}
+      >
+        Cancel
+      </button>
     </div>
   );
 }
